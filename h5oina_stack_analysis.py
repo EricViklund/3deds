@@ -33,13 +33,13 @@ def crop(data, x, y, z):
     return data
     
 
-directory = "/home/eric/Documents/Fermilab_Superconductors/Nb3Sn_Polishing/Data/G34/"
+directory = "./data/TE1NR005_3D_EDS/"
 data_folder = directory+'h5oina/'
-output_folder =  directory+'output'
+output_folder =  directory+'output/'
 
 
 h5_files = os.listdir(data_folder)
-sorted_files = sorted(h5_files, key=lambda x: int(x.split(' ')[4]))[:500]
+sorted_files = sorted(h5_files, key=lambda x: int(x.split(' ')[12]))
 
 f = h5py.File(data_folder+sorted_files[0], 'r')
 pixel_size = (0.020,0.020/np.sin(52/360*2*np.pi),0.020)
@@ -81,9 +81,9 @@ for i in range(len(sorted_files)):
     # save_im(Pt_Ma1_img,output_folder+'Pt_Ma1/'+str(i)+' Pt_Ma1.tiff')
     # save_im(Sn_La1_img,output_folder+'Sn_La1/'+str(i)+' Sn_La1.tiff')
     
-    Nb_La1_stack = append_to_stack(i, Nb_La1_stack, f, '1/EDS/Data/Window Integral/Nb La1')
-    Pt_Ma1_stack = append_to_stack(i, Pt_Ma1_stack, f, '1/EDS/Data/Window Integral/Pt Ma1')
-    Sn_La1_stack = append_to_stack(i, Sn_La1_stack, f, '1/EDS/Data/Window Integral/Sn La1')
+    Nb_La1_stack = append_to_stack(i, Nb_La1_stack, f, '1/EDS/Data/Composition/Nb Wt%')
+    Pt_Ma1_stack = append_to_stack(i, Pt_Ma1_stack, f, '1/EDS/Data/Composition/Pt Wt%')
+    Sn_La1_stack = append_to_stack(i, Sn_La1_stack, f, '1/EDS/Data/Composition/Sn Wt%')
     
 #%%
 
